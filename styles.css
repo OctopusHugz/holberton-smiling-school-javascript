@@ -1,0 +1,805 @@
+:root {
+	--button-hover-active-opacity: 0.9;
+	/* Switch to tablet view when screen width is 768px */
+	/* Switch to mobile view when screen width is 576px */
+}
+
+body {
+	font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+button {
+	filter: drop-shadow(0px 2px 20px rgba(0, 0, 0, 0.5));
+}
+
+[class^="carousel-control"] {
+	opacity: 1;
+}
+
+.hero-section {
+	height: 1386px;
+	background-image: url(images/pic_1.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 42%;
+}
+
+.nav-container {
+	padding-top: 38px;
+}
+
+.nav-list {
+	font-size: 12px;
+}
+
+.logo-container {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.hero-section-title {
+	font-size: 61px;
+	line-height: 77px;
+	margin-top: 176px;
+}
+
+.hero-subtitles {
+	width: 253px;
+}
+
+.cta-btn {
+	width: 162px;
+	height: 44px;
+	font-size: 14px;
+	background-color: #C271FF;
+	border-radius: 1.5rem;
+	margin-top: 38px;
+}
+
+.lfp-text {
+	margin-top: 150px;
+}
+
+
+.lfp-header {
+	font-size: 2rem;
+	line-height: 40px;
+	font-weight: 300;
+}
+
+.lfp-text-verb {
+	color: #C271FF;
+}
+
+.pros-section {
+	margin: 87px 0px 0px 0px;
+}
+
+.lfp-avatar {
+	/* padding-left: 0;
+	padding-right: 0; */
+	width: 150px;
+	height: 237px;
+}
+
+.lfp-avatar:nth-of-type(3),
+.lfp-avatar:nth-of-type(4) {
+	margin-top: 58px;
+}
+
+.pro-pic img {
+	height: 150px;
+	width: 150px;
+}
+
+.pro-name {
+	margin-top: 10px;
+}
+
+.pro-award {
+	width: 150px;
+	height: 8rem;
+	margin-top: 2px;
+}
+
+/* Quote Carousel Section */
+.quote-carousel-section {
+	background-color: #C271FF;
+	height: 591px;
+}
+
+.quote-carousel-section .carousel-inner {
+	padding-top: 91px;
+}
+
+.quote-carousel-section [class^="carousel-control"] {
+	top: 133.51px;
+	bottom: auto;
+}
+
+.quote-carousel-section .img-container {
+	width: 148px;
+	height: 148px;
+}
+
+.quote-carousel-caption-text,
+.quote-carousel-caption-name {
+	font-size: 22px;
+	line-height: 34px;
+}
+
+.quote-carousel-caption-name {
+	margin-top: 22px;
+}
+
+
+.mpt-text {
+	margin-top: 87px;
+	color: #071629;
+}
+
+.mpt-header {
+	font-size: 2rem;
+	line-height: 40px;
+	font-weight: 300;
+}
+
+.mpt-text-verb {
+	color: #C271FF;
+}
+
+.card {
+	width: 255px;
+	height: 335px;
+	margin-top: 75px;
+	margin-bottom: 87px;
+	border: none;
+}
+
+.card-img-top {
+	position: relative;
+}
+
+.play-button {
+	position: absolute;
+	left: 96px;
+	top: 45px;
+}
+
+.card-body {
+	height: 181px;
+	padding: 0 0 0 13px;
+}
+
+.card-title {
+	color: #071629;
+	font-size: 1rem;
+	line-height: 20px;
+	padding-top: 18px;
+}
+
+.card-text {
+	color: rgba(7, 22, 41, 0.501584);
+	font-size: 14px;
+	line-height: 24px;
+	margin-top: 7.6px;
+}
+
+.card-bottom-info {
+	margin-top: 13.4px;
+}
+
+.mpt-avatar {
+	width: 30px;
+	height: 30px;
+	margin-right: 13px;
+}
+
+.mpt-avatar-name {
+	color: #C271FF;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 27px;
+}
+
+.card-bottom-footer {
+	margin-right: 22px;
+}
+
+.popular-tutorials-section [class^="carousel-control"] {
+	height: 62.67px;
+	width: 29.04px;
+	top: 326.51px;
+}
+
+.popular-tutorials-section .carousel-control-prev {
+	left: 14px;
+}
+
+.popular-tutorials-section .carousel-control-next {
+	right: 14px;
+}
+
+.free-membership-section {
+	background: #071629;
+	height: 1142px;
+}
+
+.fm-text {
+	padding-top: 75px;
+	font-size: 2rem;
+	line-height: 40px;
+}
+
+.fm-header {
+	font-weight: 300;
+}
+
+.fm-smiles svg {
+	margin-top: 50px;
+}
+
+.fm-smiles-btn button {
+	margin-top: 82px;
+}
+
+.footer {
+	height: 249px;
+	background: #071629;
+}
+
+.footer-icon-container {
+	padding-top: 50px;
+	height: 30px;
+}
+
+.footer-social-icons {
+	width: 130px;
+	margin-top: 75px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.copyright {
+	height: 15px;
+	width: 6rem;
+	margin-top: 45px;
+	font-size: 12px;
+	line-height: 15px;
+	mix-blend-mode: normal;
+	opacity: 0.35;
+}
+
+/*** PRICING PAGE ***/
+.hero-section-pricing {
+	height: 1277px;
+	background-image: url(images/pic_2.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 53%;
+}
+
+.hero-content-pricing {
+	margin-top: 162px;
+}
+
+.hero-section-title-pricing {
+	margin-top: 49px;
+	font-size: 60px;
+	line-height: 75px;
+}
+
+.nav-list-pricing a {
+	color: white;
+}
+
+.nav-list-pricing a:hover {
+	color: #C271FF;
+}
+
+.cta-btn-pricing {
+	margin-top: 55px;
+}
+
+.package-price,
+.monthly-price {
+	margin-bottom: 0;
+}
+
+.package-price {
+	font-size: 44px;
+	line-height: 55px;
+	margin-top: 11px;
+}
+
+.monthly-price {
+	font-size: 12px;
+	line-height: 15px;
+	mix-blend-mode: normal;
+	opacity: 0.5;
+}
+
+.mobile-pricing-header {
+	margin-top: 51px;
+}
+
+.price-time-period {
+	font-size: 12px;
+	line-height: 15px;
+}
+
+.price-time-period:first-child {
+	margin-left: calc(50.13% - 15px);
+}
+
+.price-time-period:last-child {
+	margin-right: calc(3.2% - 15px);
+}
+
+hr {
+	background-color: #FFFFFF;
+	mix-blend-mode: normal;
+	opacity: 0.2;
+}
+
+.feature-text-1 {
+	font-weight: 400;
+}
+
+.toothbrush-row {
+	height: 54px;
+}
+
+.signal-text {
+	width: 175px;
+	margin-top: -55px;
+}
+
+.faq-section {
+	color: #071629;
+}
+
+.faq-title {
+	font-size: 60px;
+	line-height: 75px;
+	font-weight: 300;
+	padding-top: 74px;
+}
+
+/* .faq-block {
+	max-width: 342px;
+	margin-left: auto;
+	margin-right: auto;
+} */
+
+.faq-block-title {
+	font-size: 1rem;
+	line-height: 20px;
+	margin-bottom: 30px;
+}
+
+.faq-block-title-1 {
+	margin-top: 74px;
+}
+
+.faq-block-text {
+	margin-bottom: 146px;
+	font-size: 14px;
+	line-height: 24px;
+	color: rgba(7, 22, 41, 0.501584);
+}
+
+.faq-block-text-last {
+	margin-bottom: 108px;
+}
+
+/*** COURSES PAGE ***/
+.hero-section-courses {
+	min-height: 129px;
+	background-image: url(images/pic_3.jpg);
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.hero-tagline {
+	width: 480px;
+	height: 70px;
+	margin-top: 31px;
+	font-size: 2rem;
+	line-height: 35px;
+	font-family: 'coiny';
+}
+
+.purple-smile-text {
+	color: #C271FF;
+}
+
+.search-filters-section {
+	background-color: #C271FF;
+	height: 317px;
+}
+
+.search-container {
+	max-width: none;
+}
+
+.search-bar {
+	padding-top: 23px;
+	height: 33%;
+	/* mix-blend-mode: normal;
+	background-color: #FFFFFF;
+	opacity: 0.25; */
+}
+
+.fa {
+	color: white;
+}
+
+.filter-title {
+	color: #FFFFFF;
+}
+
+.dropdown {
+	width: 330px;
+	height: 76px;
+	margin-top: 19px;
+}
+
+.dropdown-title {
+	font-size: 12px;
+	line-height: 15px;
+}
+
+button.dropdown-toggle {
+	color: white;
+	background-color: #FFFFFF;
+	background-blend-mode: normal;
+	opacity: 0.25;
+	height: 51px;
+	font-size: 23px;
+	line-height: 29px;
+}
+
+.last-dropdown {
+	margin-bottom: 28px;
+}
+
+/*** SEARCH RESULTS SECTION  ***/
+.number-results {
+	color: rgba(7, 22, 41, 0.296247);
+	font-size: 1rem;
+	line-height: 20px;
+	margin-bottom: 0;
+	width: 63px;
+	margin-top: 2rem;
+}
+
+.last-results-row {
+	margin-bottom: 63px;
+}
+
+/*** MEDIA QUERIES  ***/
+
+/* Tablet Media Query */
+
+@media (min-width: 577px) and (max-width: 768px) {
+	.nav-container {
+		padding-top: 34px;
+	}
+
+	.pros-section {
+		max-width: 694px;
+	}
+
+	.quote-carousel-section .carousel-inner {
+		padding-top: 75px;
+	}
+
+	.quote-carousel-section {
+		height: 392px;
+	}
+
+	.quote-carousel-caption {
+		width: 370px;
+		margin-left: 34px;
+	}
+
+	.quote-carousel-section [class^="carousel-control"] {
+		top: 156.51px;
+		bottom: auto;
+	}
+
+	.quote-carousel-section .img-container {
+		margin-left: 101px;
+	}
+
+	.popular-tutorials-section .carousel-control-prev {
+		left: 38.48px;
+	}
+
+	.popular-tutorials-section .carousel-control-next {
+		right: 38.48px;
+	}
+
+	.popular-tutorials-section .card:first-child {
+		margin-right: 30px;
+	}
+
+	.free-membership-section {
+		height: 713px;
+	}
+
+	.fm-smiles-btn button {
+		margin-top: 75px;
+	}
+
+	.footer-icon-container {
+		margin-left: 39px;
+		margin-right: 366px;
+		padding-top: 75px;
+	}
+
+	.footer-social-icons {
+		margin-top: 109px;
+		margin-left: 0;
+		margin-right: 44px;
+	}
+
+	.copyright {
+		margin-top: 60px;
+	}
+
+	.hero-content-pricing {
+		margin-top: 193px;
+		max-width: 690px;
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.hero-section-title-pricing {
+		margin-top: 75px;
+	}
+
+	.package-price {
+		margin-top: 30px;
+	}
+
+	.monthly-price {
+		margin-bottom: 62px;
+	}
+
+	.signal-text {
+		width: 210px;
+	}
+
+	.faq-section {
+		max-width: 570px;
+	}
+
+	.faq-block-title-2 {
+		margin-top: 74px;
+	}
+
+	.faq-block-title-3,
+	.faq-block-title-4 {
+		margin-top: 74px;
+	}
+
+	.faq-block-text {
+		margin-bottom: 0;
+	}
+
+	.faq-block-text-3,
+	.faq-block-text-last {
+		margin-bottom: 110px;
+	}
+
+	.hero-section-courses {
+		height: 216px;
+	}
+
+	.search-filters-section {
+		height: 236px;
+	}
+
+	.search-bar {
+		height: 45%;
+	}
+
+	.number-results {
+		margin-top: 34px;
+	}
+
+	.last-results-row {
+		margin-bottom: 75px;
+	}
+}
+
+/* Desktop Media Query */
+@media (min-width: 769px) {
+	.nav-container {
+		max-width: 1104px;
+		padding-top: 35px;
+	}
+
+	.pros-section {
+		max-width: 1009px;
+	}
+
+	.quote-carousel-section .carousel-inner {
+		padding-top: 108px;
+	}
+
+	.quote-carousel-section {
+		height: 392px;
+	}
+
+	.quote-carousel-caption {
+		width: 730px;
+		margin-left: 34px;
+		margin-right: 237px;
+	}
+
+	.quote-carousel-section [class^="carousel-control"] {
+		top: 156.51px;
+		bottom: auto;
+	}
+
+	.quote-carousel-section .carousel-control-prev {
+		left: 56.48px;
+	}
+
+	.quote-carousel-section .carousel-control-next {
+		right: 56.48px;
+	}
+
+	.quote-carousel-section .img-container {
+		margin-left: 260px;
+	}
+
+	.popular-tutorials-section .carousel-control-prev {
+		left: 106.48px;
+	}
+
+	.popular-tutorials-section .carousel-control-next {
+		right: 106.48px;
+	}
+
+	.popular-tutorials-section .card:nth-child(1),
+	.popular-tutorials-section .card:nth-child(2),
+	.popular-tutorials-section .card:nth-child(3) {
+		margin-right: 30px;
+	}
+
+	.free-membership-section {
+		height: 713px;
+	}
+
+	.fm-smiles-btn button {
+		margin-top: 85px;
+	}
+
+	.footer-icon-container {
+		margin-left: 165px;
+		padding-top: 75px;
+	}
+
+	.footer-social-icons {
+		margin-top: 109px;
+		margin-left: 0;
+		margin-right: 240px;
+	}
+
+	.copyright {
+		margin-top: 60px;
+	}
+
+	.hero-section-pricing {
+		height: 1170px;
+	}
+
+	.hero-content-pricing {
+		margin-top: 192px;
+	}
+
+	.hero-section-title-pricing {
+		margin-top: 75px;
+	}
+
+	.package-price {
+		margin-top: 30px;
+	}
+
+	.monthly-price {
+		margin-bottom: 62px;
+	}
+
+	.signal-text {
+		width: 350px;
+	}
+
+	.faq-section {
+		max-width: 920px;
+	}
+
+	.faq-block {
+		max-width: 342px;
+	}
+
+	.faq-block-title-2 {
+		margin-top: 74px;
+	}
+
+	.faq-block-title-3,
+	.faq-block-title-4 {
+		margin-top: 74px;
+	}
+
+	.faq-block-text {
+		max-width: 350px;
+		margin-bottom: 0;
+	}
+
+	.faq-block-text-3,
+	.faq-block-text-last {
+		margin-bottom: 127px;
+	}
+
+	.hero-section-courses {
+		background-size: cover;
+		height: 216px;
+	}
+
+	.hero-tagline {
+		margin-top: 30px;
+	}
+
+	.search-filters-section {
+		height: 138px;
+	}
+
+	.search-bar {
+		height: 75%;
+	}
+
+	.number-results {
+		margin-top: 47px;
+	}
+
+	.last-results-row {
+		margin-bottom: 75px;
+	}
+}
+
+
+/* Pros Section Media Queries */
+@media (min-width: 480px) {
+	.lfp-avatar:nth-of-type(3) {
+		margin-top: 0;
+	}
+}
+
+@media (min-width: 630px) {
+	.lfp-avatar:nth-of-type(4) {
+		margin-top: 0;
+	}
+
+	.hero-section {
+		height: 1093px;
+	}
+}
+
+@media (min-width: 684px) {
+	.hero-section-title {
+		font-size: 120px;
+		line-height: 150.84px;
+		margin-top: 156px;
+	}
+}
+
+
+@media (min-width: 1200px) {
+	.free-membership-section {
+		height: 502px;
+	}
+}
