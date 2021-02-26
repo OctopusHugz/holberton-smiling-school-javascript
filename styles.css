@@ -16,6 +16,11 @@ button {
 	opacity: 1;
 }
 
+/* .carousel-item.active,
+.carousel-item-next {
+	display: flex;
+} */
+
 .hero-section {
 	height: 1386px;
 	background-image: url(images/pic_1.jpg);
@@ -117,7 +122,7 @@ button {
 	bottom: auto;
 }
 
-.quote-carousel-section .img-container {
+.quote-carousel-section .img-container img {
 	width: 148px;
 	height: 148px;
 }
@@ -509,9 +514,9 @@ button.dropdown-toggle {
 		bottom: auto;
 	}
 
-	.quote-carousel-section .img-container {
+	/* .quote-carousel-section .img-container {
 		margin-left: 101px;
-	}
+	} */
 
 	.popular-tutorials-section .carousel-control-prev {
 		left: 38.48px;
@@ -653,9 +658,9 @@ button.dropdown-toggle {
 		right: 56.48px;
 	}
 
-	.quote-carousel-section .img-container {
+	/* .quote-carousel-section .img-container {
 		margin-left: 260px;
-	}
+	} */
 
 	.popular-tutorials-section .carousel-control-prev {
 		left: 106.48px;
