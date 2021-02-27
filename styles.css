@@ -34,22 +34,19 @@ button {
 
 [class^="carousel-control"] {
 	opacity: 1;
-	position: relative;
+	/* position: relative; */
 	/* height: 80%;
 	width: 29.04px; */
+}
+
+.mobile-arrow {
+	position: relative;
 }
 
 .carousel-item .row img {
 	height: 148px;
 	width: 148px;
 }
-
-/* .carousel-item.active,
-.carousel-item-next,
-.carousel-item-prev,
-.carousel-item-left {
-	display: flex;
-} */
 
 .hero-section {
 	height: 1386px;
