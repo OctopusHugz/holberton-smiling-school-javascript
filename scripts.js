@@ -70,12 +70,96 @@ $(() => {
     });
   }
   function loadVideos() {
+    let arrowLeft = $(
+      '<a class="carousel-control-prev" href="#popularTutorialsCarousel" role="button" data-slide="prev"></a>'
+    );
+    let arrowRight = $(
+      '<a class="carousel-control-next" href="#popularTutorialsCarousel" role="button" data-slide="next"></a>'
+    );
+    let leftArrowSVG = $(
+      '<svg width="30" height="64" viewBox="0 0 30 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M28.7802 63.1838L0.477539 31.8487L28.7802 0.51355L29.5224 1.18384L1.8253 31.8487L29.5224 62.5136L28.7802 63.1838Z" fill="#071629" /></svg><span class="sr-only">Previous</span>'
+    );
+    let rightArrowSVG = $(
+      '<svg width="30" height="64" viewBox="0 0 30 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.21975 63.1838L29.5225 31.8487L1.21975 0.51355L0.477648 1.18384L28.1747 31.8487L0.477648 62.5136L1.21975 63.1838Z" fill="#071629" /></svg><span class="sr-only">Next</span>'
+    );
+    $(arrowLeft).append(leftArrowSVG);
+    $(arrowRight).append(rightArrowSVG);
     $.getJSON(
       "https://smileschool-api.hbtn.info/popular-tutorials",
       (response) => {
-        console.log(response);
+        response.forEach((card) => {
+          // author: "Henry Hughes"
+          // author_pic_url: "https://smileschool-api.s3.amazonaws.com/profile_4.jpg"
+          // duration: "18 min"
+          // id: 6
+          // keywords: (2) ["Face", "Cry"]
+          // published_at: 1586724529
+          // star: 5
+          // sub-title: "Lorem ipsum dolor sit amet, consect adipiscing elit, sed do eiusmod."
+          // thumb_url: "https://smileschool-api.s3.amazonaws.com/thumbnail_4.jpg"
+          // title: "Cry and Smile"
+          // topic: "Expert"
+          // views: 321
+          let cardSubtitle = card["sub-title"];
+          let carouselItemActive = $(
+            '<div class="carousel-item active d-flex flex-column align-items-center flex-sm-row justify-content-sm-center"></div>'
+          );
+          let carouselItemNonActive = $(
+            '<div class="carousel-item d-flex flex-column align-items-center flex-sm-row justify-content-sm-center"></div>'
+          );
+          let layoutDiv = $(
+            '<div class="col-12 col-md-6 col-lg-4 col-xl-3"></div>'
+          );
+          let cardDiv = $('<div class="card"></div>');
+          let cardImgTop = $(
+            `<img class="card-img-top" src="${card.thumb_url}" alt="Card image cap">`
+          );
+          let playButton = $(
+            '<svg width="64" height="64" viewBox="0 0 64 64" fill="none" class="play-button" xmlns="http://www.w3.org/2000/svg"><path opacity="0.860352" fill-rule="evenodd" clip-rule="evenodd" d="M32 64C49.6731 64 64 49.6731 64 32C64 14.3269 49.6731 0 32 0C14.3269 0 0 14.3269 0 32C0 49.6731 14.3269 64 32 64Z" fill="white" /><path fill-rule="evenodd" clip-rule="evenodd" d="M40.5 32.5L27.5 40.5L27.5 24.5L40.5 32.5Z" fill="#C271FF" /></svg>'
+          );
+          let cardBody = $('<div class="card-body"></div>');
+          let cardTitle = $(`<h5 class="card-title mb-0">${card.title}</h5>`);
+          let cardText = $(`<p class="card-text">${cardSubtitle}<p>`);
+          let cardBottomInfo = $('<div class="card-bottom-info d-flex"><div>');
+          let cardBottomAvatarImg = $(
+            `<img src="${card.author_pic_url}" alt="" class="rounded-circle mpt-avatar">`
+          );
+          let cardBottomAvatarName = $(
+            `<p class="mpt-avatar-name">${card.author}</p>`
+          );
+          let cardBottomFooter = $(
+            '<div class="card-bottom-footer d-flex justify-content-between">'
+          );
+          $(layoutDiv).append(cardDiv);
+          if (card.id === 1) {
+            $("#popularTutorialsCarousel .carousel-inner").append(
+              carouselItemActive
+            );
+            $(carouselItemActive).append(layoutDiv);
+          } else {
+            $("#popularTutorialsCarousel .carousel-inner").append(
+              carouselItemNonActive
+            );
+            $(carouselItemNonActive).append(layoutDiv);
+          }
+          $(cardDiv).append(cardImgTop, playButton, cardBody);
+          $(cardBody).append(
+            cardTitle,
+            cardText,
+            cardBottomInfo,
+            cardBottomFooter
+          );
+          $(cardBottomInfo).append(cardBottomAvatarImg, cardBottomAvatarName);
+          $(cardBottomFooter);
+        });
       }
-    );
+    ).done(() => {
+      $("#popularTutorialsCarousel .carousel-inner").append(
+        arrowLeft,
+        arrowRight
+      );
+    });
   }
   createQuotes();
+  loadVideos();
 });
