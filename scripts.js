@@ -1,4 +1,6 @@
 $(() => {
+  $("#quotesCarousel").hide();
+  $(".loader-div").css("display", "flex");
   $.getJSON("https://smileschool-api.hbtn.info/quotes", (response) => {
     response.forEach((user) => {
       let userName = user.name;
@@ -12,5 +14,7 @@ $(() => {
       carouselNameH5.html(userName);
       carouselTitleP.html(userTitle);
     });
+    $(".loader-div").css("display", "none");
+    $("#quotesCarousel").show();
   });
 });
