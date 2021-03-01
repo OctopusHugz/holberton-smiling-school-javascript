@@ -116,9 +116,6 @@ $(() => {
           let cardImgTop = $(
             `<div class="card-img-top" style="background-image: url(${card.thumb_url});" alt="Card image cap"><img src="./images/play.png" alt="Play Button"></div>`
           );
-          // let playButton = $(
-          //   '<svg width="64" height="64" viewBox="0 0 64 64" fill="none" class="play-button" xmlns="http://www.w3.org/2000/svg"><path opacity="0.860352" fill-rule="evenodd" clip-rule="evenodd" d="M32 64C49.6731 64 64 49.6731 64 32C64 14.3269 49.6731 0 32 0C14.3269 0 0 14.3269 0 32C0 49.6731 14.3269 64 32 64Z" fill="white" /><path fill-rule="evenodd" clip-rule="evenodd" d="M40.5 32.5L27.5 40.5L27.5 24.5L40.5 32.5Z" fill="#C271FF" /></svg>'
-          // );
           let cardBody = $('<div class="card-body"></div>');
           let cardTitle = $(`<h5 class="card-title mb-0">${card.title}</h5>`);
           let cardText = $(`<p class="card-text">${cardSubtitle}<p>`);
@@ -130,7 +127,7 @@ $(() => {
             `<p class="mpt-avatar-name">${card.author}</p>`
           );
           let cardBottomFooter = $(
-            '<div class="card-bottom-footer d-flex justify-content-between">'
+            `<div class="card-bottom-footer d-flex justify-content-between align-items-center"><div class="duration">${card.duration}</div></div>`
           );
           $(layoutDiv).append(cardDiv);
           if (card.id === 1) {
@@ -150,7 +147,6 @@ $(() => {
               .children(".carousel-inner")
               .append(carouselItemNonActive);
           }
-          // $(cardDiv).append(cardImgTop, playButton, cardBody);
           $(cardDiv).append(cardImgTop, cardBody);
           $(cardBody).append(
             cardTitle,
@@ -159,7 +155,21 @@ $(() => {
             cardBottomFooter
           );
           $(cardBottomInfo).append(cardBottomAvatarImg, cardBottomAvatarName);
-          // $(cardBottomFooter);
+          let ratingDiv = $(
+            '<div class="rating d-flex justify-content-between"></div>'
+          );
+          $(cardBottomFooter).prepend(ratingDiv);
+          for (let starCount = 0; starCount < 5; starCount++) {
+            if (starCount < card.star) {
+              $(ratingDiv).append(
+                '<img src="images/star_on.png" alt="" srcset=""></img>'
+              );
+            } else {
+              $(ratingDiv).append(
+                '<img src="images/star_off.png" alt="" srcset=""></img>'
+              );
+            }
+          }
           count++;
         });
       }
