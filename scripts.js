@@ -1,7 +1,7 @@
 $(() => {
   function createQuotes() {
     $("#quotesCarousel").hide();
-    $(".loader-div").css("display", "flex");
+    $(".quote-carousel-section .loader-div").css("display", "flex");
     $.getJSON("https://smileschool-api.hbtn.info/quotes", (response) => {
       response.forEach((user) => {
         let userName = user.name;
@@ -65,11 +65,12 @@ $(() => {
         carouselTextName.html(userName);
         carouselTextTitle.html(userTitle);
       });
-      $(".loader-div").css("display", "none");
+      $(".quote-carousel-section .loader-div").css("display", "none");
       $("#quotesCarousel").show();
     });
   }
   function loadVideos() {
+    $("section.popular-tutorials-section .loader-div").css("display", "flex");
     let arrowLeft = $(
       '<a class="carousel-control-prev" href="#popularTutorialsCarousel" role="button" data-slide="prev"></a>'
     );
@@ -92,18 +93,6 @@ $(() => {
           // if (count === 1) {
           //   return;
           // }
-          // author: "Henry Hughes"
-          // author_pic_url: "https://smileschool-api.s3.amazonaws.com/profile_4.jpg"
-          // duration: "18 min"
-          // id: 6
-          // keywords: (2) ["Face", "Cry"]
-          // published_at: 1586724529
-          // star: 5
-          // sub-title: "Lorem ipsum dolor sit amet, consect adipiscing elit, sed do eiusmod."
-          // thumb_url: "https://smileschool-api.s3.amazonaws.com/thumbnail_4.jpg"
-          // title: "Cry and Smile"
-          // topic: "Expert"
-          // views: 321
           let cardSubtitle = card["sub-title"];
           let carouselItemActive = $(
             '<div class="carousel-item active"></div>'
@@ -174,7 +163,7 @@ $(() => {
         });
       }
     ).done(() => {
-      $("#popularTutorialsCarousel").append(arrowLeft, arrowRight);
+      // $("#popularTutorialsCarousel").append(arrowLeft, arrowRight);
       $(`#popularTutorialsCarousel .carousel-item`).each(function () {
         var minPerSlide = 4;
         var next = $(this).next();
@@ -193,6 +182,8 @@ $(() => {
         }
       });
     });
+    $("section.popular-tutorials-section .loader-div").css("display", "none");
+    // $("#popularTutorialsCarousel").show();
   }
   createQuotes();
   loadVideos();
