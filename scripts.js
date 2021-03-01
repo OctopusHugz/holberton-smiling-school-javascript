@@ -87,7 +87,11 @@ $(() => {
     $.getJSON(
       "https://smileschool-api.hbtn.info/popular-tutorials",
       (response) => {
+        let count = 0;
         response.forEach((card) => {
+          // if (count === 1) {
+          //   return;
+          // }
           // author: "Henry Hughes"
           // author_pic_url: "https://smileschool-api.s3.amazonaws.com/profile_4.jpg"
           // duration: "18 min"
@@ -102,21 +106,19 @@ $(() => {
           // views: 321
           let cardSubtitle = card["sub-title"];
           let carouselItemActive = $(
-            '<div class="carousel-item active d-flex flex-column align-items-center flex-sm-row justify-content-sm-center"></div>'
+            '<div class="carousel-item active"></div>'
           );
-          let carouselItemNonActive = $(
-            '<div class="carousel-item d-flex flex-column align-items-center flex-sm-row justify-content-sm-center"></div>'
-          );
+          let carouselItemNonActive = $('<div class="carousel-item"></div>');
           let layoutDiv = $(
-            '<div class="col-12 col-md-6 col-lg-4 col-xl-3"></div>'
+            '<div class="col-12 col-md-6 col-lg-4 col-xl-3 d-flex justify-content-center justify-content-lg-around"></div>'
           );
           let cardDiv = $('<div class="card"></div>');
           let cardImgTop = $(
-            `<img class="card-img-top" src="${card.thumb_url}" alt="Card image cap">`
+            `<div class="card-img-top" style="background-image: url(${card.thumb_url});" alt="Card image cap"><img src="./images/play.png" alt="Play Button"></div>`
           );
-          let playButton = $(
-            '<svg width="64" height="64" viewBox="0 0 64 64" fill="none" class="play-button" xmlns="http://www.w3.org/2000/svg"><path opacity="0.860352" fill-rule="evenodd" clip-rule="evenodd" d="M32 64C49.6731 64 64 49.6731 64 32C64 14.3269 49.6731 0 32 0C14.3269 0 0 14.3269 0 32C0 49.6731 14.3269 64 32 64Z" fill="white" /><path fill-rule="evenodd" clip-rule="evenodd" d="M40.5 32.5L27.5 40.5L27.5 24.5L40.5 32.5Z" fill="#C271FF" /></svg>'
-          );
+          // let playButton = $(
+          //   '<svg width="64" height="64" viewBox="0 0 64 64" fill="none" class="play-button" xmlns="http://www.w3.org/2000/svg"><path opacity="0.860352" fill-rule="evenodd" clip-rule="evenodd" d="M32 64C49.6731 64 64 49.6731 64 32C64 14.3269 49.6731 0 32 0C14.3269 0 0 14.3269 0 32C0 49.6731 14.3269 64 32 64Z" fill="white" /><path fill-rule="evenodd" clip-rule="evenodd" d="M40.5 32.5L27.5 40.5L27.5 24.5L40.5 32.5Z" fill="#C271FF" /></svg>'
+          // );
           let cardBody = $('<div class="card-body"></div>');
           let cardTitle = $(`<h5 class="card-title mb-0">${card.title}</h5>`);
           let cardText = $(`<p class="card-text">${cardSubtitle}<p>`);
@@ -136,13 +138,20 @@ $(() => {
               carouselItemActive
             );
             $(carouselItemActive).append(layoutDiv);
+            $(`#popularTutorialsCarousel`)
+              .children(".carousel-inner")
+              .append(carouselItemActive);
           } else {
             $("#popularTutorialsCarousel .carousel-inner").append(
               carouselItemNonActive
             );
             $(carouselItemNonActive).append(layoutDiv);
+            $(`#popularTutorialsCarousel`)
+              .children(".carousel-inner")
+              .append(carouselItemNonActive);
           }
-          $(cardDiv).append(cardImgTop, playButton, cardBody);
+          // $(cardDiv).append(cardImgTop, playButton, cardBody);
+          $(cardDiv).append(cardImgTop, cardBody);
           $(cardBody).append(
             cardTitle,
             cardText,
@@ -150,16 +159,47 @@ $(() => {
             cardBottomFooter
           );
           $(cardBottomInfo).append(cardBottomAvatarImg, cardBottomAvatarName);
-          $(cardBottomFooter);
+          // $(cardBottomFooter);
+          count++;
         });
       }
     ).done(() => {
-      $("#popularTutorialsCarousel .carousel-inner").append(
-        arrowLeft,
-        arrowRight
-      );
+      $("#popularTutorialsCarousel").append(arrowLeft, arrowRight);
+      $(`#popularTutorialsCarousel .carousel-item`).each(function () {
+        var minPerSlide = 4;
+        var next = $(this).next();
+        if (!next.length) {
+          next = $(this).siblings(":first");
+        }
+        next.children(":first-child").clone().appendTo($(this));
+
+        for (var i = 0; i < minPerSlide; i++) {
+          next = next.next();
+          if (!next.length) {
+            next = $(this).siblings(":first");
+          }
+
+          next.children(":first-child").clone().appendTo($(this));
+        }
+      });
     });
   }
   createQuotes();
   loadVideos();
+  $(".carousel").carousel({
+    interval: 10000,
+  });
 });
+
+// XML API Code
+
+// $(document).ready(function () {
+//   $.get("https://smileschool-api.hbtn.info/xml/quotes", (response) => {
+//     let responseDOM = response.documentElement;
+//     let allQuotes = responseDOM.getElementsByTagName("quote");
+//     for (let index = 0; index < allQuotes.length; index++) {
+//       let picURL = responseDOM.getElementsByTagName("pic_url");
+//       console.log(picURL);
+//     }
+//   });
+// });
