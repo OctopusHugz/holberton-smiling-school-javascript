@@ -1,6 +1,5 @@
 $(() => {
   function createQuotes() {
-    $("#quotesCarousel").hide();
     $(".quote-carousel-section .loader-div").css("display", "flex");
     $.getJSON("https://smileschool-api.hbtn.info/quotes", (response) => {
       response.forEach((user) => {
@@ -65,11 +64,12 @@ $(() => {
         carouselTextName.html(userName);
         carouselTextTitle.html(userTitle);
       });
-      $(".quote-carousel-section .loader-div").css("display", "none");
-      $("#quotesCarousel").show();
+    }).done(() => {
+      $(".quote-carousel-section .loader").remove();
+      $(".quote-carousel-section .loader-div").remove();
     });
   }
-  function loadVideos() {
+  function loadTutorials() {
     $("section.popular-tutorials-section .loader-div").css("display", "flex");
     let arrowLeft = $(
       '<a class="carousel-control-prev" href="#popularTutorialsCarousel" role="button" data-slide="prev"></a>'
@@ -88,11 +88,7 @@ $(() => {
     $.getJSON(
       "https://smileschool-api.hbtn.info/popular-tutorials",
       (response) => {
-        let count = 0;
         response.forEach((card) => {
-          // if (count === 1) {
-          //   return;
-          // }
           let cardSubtitle = card["sub-title"];
           let carouselItemActive = $(
             '<div class="carousel-item active"></div>'
@@ -159,11 +155,9 @@ $(() => {
               );
             }
           }
-          count++;
         });
       }
     ).done(() => {
-      // $("#popularTutorialsCarousel").append(arrowLeft, arrowRight);
       $(`#popularTutorialsCarousel .carousel-item`).each(function () {
         var minPerSlide = 4;
         var next = $(this).next();
@@ -181,11 +175,116 @@ $(() => {
           next.children(":first-child").clone().appendTo($(this));
         }
       });
+      $("section.popular-tutorials-section .loader").remove();
+      $("section.popular-tutorials-section .loader-div").remove();
     });
-    $("section.popular-tutorials-section .loader-div").css("display", "none");
-    // $("#popularTutorialsCarousel").show();
+  }
+
+  function loadVideos() {
+    $("section.latest-videos-section .loader-div").css("display", "flex");
+    let arrowLeft = $(
+      '<a class="carousel-control-prev" href="#latestVideosCarousel" role="button" data-slide="prev"></a>'
+    );
+    let arrowRight = $(
+      '<a class="carousel-control-next" href="#latestVideosCarousel" role="button" data-slide="next"></a>'
+    );
+    let leftArrowSVG = $(
+      '<svg width="30" height="64" viewBox="0 0 30 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M28.7802 63.1838L0.477539 31.8487L28.7802 0.51355L29.5224 1.18384L1.8253 31.8487L29.5224 62.5136L28.7802 63.1838Z" fill="#071629" /></svg><span class="sr-only">Previous</span>'
+    );
+    let rightArrowSVG = $(
+      '<svg width="30" height="64" viewBox="0 0 30 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.21975 63.1838L29.5225 31.8487L1.21975 0.51355L0.477648 1.18384L28.1747 31.8487L0.477648 62.5136L1.21975 63.1838Z" fill="#071629" /></svg><span class="sr-only">Next</span>'
+    );
+    $(arrowLeft).append(leftArrowSVG);
+    $(arrowRight).append(rightArrowSVG);
+    $.getJSON("https://smileschool-api.hbtn.info/latest-videos", (response) => {
+      response.forEach((card) => {
+        let cardSubtitle = card["sub-title"];
+        let carouselItemActive = $('<div class="carousel-item active"></div>');
+        let carouselItemNonActive = $('<div class="carousel-item"></div>');
+        let layoutDiv = $(
+          '<div class="col-12 col-md-6 col-lg-4 col-xl-3 d-flex justify-content-center justify-content-lg-around"></div>'
+        );
+        let cardDiv = $('<div class="card"></div>');
+        let cardImgTop = $(
+          `<div class="card-img-top" style="background-image: url(${card.thumb_url});" alt="Card image cap"><img src="./images/play.png" alt="Play Button"></div>`
+        );
+        let cardBody = $('<div class="card-body"></div>');
+        let cardTitle = $(`<h5 class="card-title mb-0">${card.title}</h5>`);
+        let cardText = $(`<p class="card-text">${cardSubtitle}<p>`);
+        let cardBottomInfo = $('<div class="card-bottom-info d-flex"><div>');
+        let cardBottomAvatarImg = $(
+          `<img src="${card.author_pic_url}" alt="" class="rounded-circle mpt-avatar">`
+        );
+        let cardBottomAvatarName = $(
+          `<p class="mpt-avatar-name">${card.author}</p>`
+        );
+        let cardBottomFooter = $(
+          `<div class="card-bottom-footer d-flex justify-content-between align-items-center"><div class="duration">${card.duration}</div></div>`
+        );
+        $(layoutDiv).append(cardDiv);
+        if (card.id === 1) {
+          $("#latestVideosCarousel .carousel-inner").append(carouselItemActive);
+          $(carouselItemActive).append(layoutDiv);
+          $(`#latestVideosCarousel`)
+            .children(".carousel-inner")
+            .append(carouselItemActive);
+        } else {
+          $("#latestVideosCarousel .carousel-inner").append(
+            carouselItemNonActive
+          );
+          $(carouselItemNonActive).append(layoutDiv);
+          $(`#latestVideosCarousel`)
+            .children(".carousel-inner")
+            .append(carouselItemNonActive);
+        }
+        $(cardDiv).append(cardImgTop, cardBody);
+        $(cardBody).append(
+          cardTitle,
+          cardText,
+          cardBottomInfo,
+          cardBottomFooter
+        );
+        $(cardBottomInfo).append(cardBottomAvatarImg, cardBottomAvatarName);
+        let ratingDiv = $(
+          '<div class="rating d-flex justify-content-between"></div>'
+        );
+        $(cardBottomFooter).prepend(ratingDiv);
+        for (let starCount = 0; starCount < 5; starCount++) {
+          if (starCount < card.star) {
+            $(ratingDiv).append(
+              '<img src="images/star_on.png" alt="" srcset=""></img>'
+            );
+          } else {
+            $(ratingDiv).append(
+              '<img src="images/star_off.png" alt="" srcset=""></img>'
+            );
+          }
+        }
+      });
+    }).done(() => {
+      $(`#latestVideosCarousel .carousel-item`).each(function () {
+        var minPerSlide = 4;
+        var next = $(this).next();
+        if (!next.length) {
+          next = $(this).siblings(":first");
+        }
+        next.children(":first-child").clone().appendTo($(this));
+
+        for (var i = 0; i < minPerSlide; i++) {
+          next = next.next();
+          if (!next.length) {
+            next = $(this).siblings(":first");
+          }
+
+          next.children(":first-child").clone().appendTo($(this));
+        }
+      });
+      $("section.latest-videos-section .loader").remove();
+      $("section.latest-videos-section .loader-div").remove();
+    });
   }
   createQuotes();
+  loadTutorials();
   loadVideos();
   $(".carousel").carousel({
     interval: 10000,

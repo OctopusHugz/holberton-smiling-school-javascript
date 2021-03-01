@@ -14,7 +14,10 @@ button {
 
 #popularTutorialsCarousel .carousel-item-next,
 #popularTutorialsCarousel .carousel-item-prev,
-#popularTutorialsCarousel .carousel-item.active {
+#popularTutorialsCarousel .carousel-item.active,
+#latestVideosCarousel .carousel-item-next,
+#latestVideosCarousel .carousel-item-prev,
+#latestVideosCarousel .carousel-item.active {
 	display: flex;
 }
 
@@ -247,7 +250,8 @@ button {
 	color: #C271FF;
 }
 
-#popularTutorialsCarousel .carousel-inner {
+#popularTutorialsCarousel .carousel-inner,
+#latestVideosCarousel .carousel-inner {
 	width: 80%;
 }
 
