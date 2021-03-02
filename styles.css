@@ -592,7 +592,7 @@ button.dropdown-toggle {
 	font-size: 1rem;
 	line-height: 20px;
 	margin-bottom: 0;
-	width: 63px;
+	/* width: 63px; */
 	margin-top: 2rem;
 }
 

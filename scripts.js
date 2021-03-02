@@ -285,11 +285,57 @@ $(() => {
   }
 
   function loadCourses(searchQuery, searchTopic, searchSort) {
+    $("div.results-grid").empty();
     let data = { q: searchQuery, topic: searchTopic, sort: searchSort };
     $.getJSON("https://smileschool-api.hbtn.info/courses", data, (response) => {
       let courses = response.courses;
-      courses.forEach((course) => {
-        console.log(course);
+      if (courses.length === 1)
+        $(".number-results").html(`${courses.length} Videos`);
+      else $(".number-results").html(`${courses.length} Video`);
+      courses.forEach((card) => {
+        console.log(card);
+        let cardSubtitle = card["sub-title"];
+        let cardDiv = $('<div class="card col-sm-6"></div>');
+        let cardImgTop = $(
+          `<div class="card-img-top" style="background-image: url(${card.thumb_url});" alt="Card image cap"><img src="./images/play.png" alt="Play Button"></div>`
+        );
+        let cardBody = $('<div class="card-body"></div>');
+        let cardTitle = $(`<h5 class="card-title mb-0">${card.title}</h5>`);
+        let cardText = $(`<p class="card-text">${cardSubtitle}<p>`);
+        let cardBottomInfo = $('<div class="card-bottom-info d-flex"><div>');
+        let cardBottomAvatarImg = $(
+          `<img src="${card.author_pic_url}" alt="" class="rounded-circle mpt-avatar">`
+        );
+        let cardBottomAvatarName = $(
+          `<p class="mpt-avatar-name">${card.author}</p>`
+        );
+        let cardBottomFooter = $(
+          `<div class="card-bottom-footer d-flex justify-content-between align-items-center"><div class="duration">${card.duration}</div></div>`
+        );
+        $("div.results-grid").append(cardDiv);
+        $(cardDiv).append(cardImgTop, cardBody);
+        $(cardBody).append(
+          cardTitle,
+          cardText,
+          cardBottomInfo,
+          cardBottomFooter
+        );
+        $(cardBottomInfo).append(cardBottomAvatarImg, cardBottomAvatarName);
+        let ratingDiv = $(
+          '<div class="rating d-flex justify-content-between"></div>'
+        );
+        $(cardBottomFooter).prepend(ratingDiv);
+        for (let starCount = 0; starCount < 5; starCount++) {
+          if (starCount < card.star) {
+            $(ratingDiv).append(
+              '<img src="images/star_on.png" alt="" srcset=""></img>'
+            );
+          } else {
+            $(ratingDiv).append(
+              '<img src="images/star_off.png" alt="" srcset=""></img>'
+            );
+          }
+        }
       });
     });
   }
@@ -322,5 +368,7 @@ $(() => {
       $(".last-dropdown button").text(searchSort);
       loadCourses(searchQuery, searchTopic, searchSort);
     });
+    // Initial load of All Videos by Most Popular
+    loadCourses("", "All", "Most Popular");
   }
 });
