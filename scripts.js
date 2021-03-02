@@ -374,5 +374,7 @@ $(() => {
     });
     // Initial load of All Videos by Most Popular
     loadCourses("", "All", "Most Popular");
+  } else if (window.location.pathname.endsWith("pricing.html")) {
+    createQuotes();
   }
 });
