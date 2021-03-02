@@ -290,8 +290,8 @@ $(() => {
     $.getJSON("https://smileschool-api.hbtn.info/courses", data, (response) => {
       let courses = response.courses;
       if (courses.length === 1)
-        $(".number-results").html(`${courses.length} Videos`);
-      else $(".number-results").html(`${courses.length} Video`);
+        $(".number-results").html(`${courses.length} Video`);
+      else $(".number-results").html(`${courses.length} Videos`);
       courses.forEach((card) => {
         console.log(card);
         let cardSubtitle = card["sub-title"];
