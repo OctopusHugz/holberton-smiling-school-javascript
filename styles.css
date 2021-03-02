@@ -8,8 +8,13 @@ body {
 	font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-button {
+.hero-section button,
+.free-membership-section button {
 	filter: drop-shadow(0px 2px 20px rgba(0, 0, 0, 0.5));
+}
+
+.search-filters-section button:hover {
+	color: white;
 }
 
 #popularTutorialsCarousel .carousel-item-next,
@@ -511,12 +516,31 @@ hr {
 
 .search-filters-section {
 	background-color: #C271FF;
-	height: 317px;
+	/* height: 317px; */
 }
 
-.search-container {
-	max-width: none;
+.input-group,
+.form-control {
+	background-color: #D195FE;
+	color: white;
+	font-size: 23px;
+	line-height: 29px;
+	opacity: .75;
 }
+
+.form-control {
+	border: 1px solid #D195FE;
+}
+
+.form-control:focus-within {
+	background-color: #D195FE;
+	color: white;
+	opacity: 1;
+}
+
+/* .search-container {
+	max-width: none;
+} */
 
 .search-bar {
 	padding-top: 23px;
@@ -524,6 +548,10 @@ hr {
 	/* mix-blend-mode: normal;
 	background-color: #FFFFFF;
 	opacity: 0.25; */
+}
+
+::placeholder {
+	color: white !important;
 }
 
 .fa {
@@ -535,8 +563,8 @@ hr {
 }
 
 .dropdown {
-	width: 330px;
-	height: 76px;
+	/* width: 330px;
+	height: 76px; */
 	margin-top: 19px;
 }
 
@@ -547,9 +575,8 @@ hr {
 
 button.dropdown-toggle {
 	color: white;
-	background-color: #FFFFFF;
-	background-blend-mode: normal;
-	opacity: 0.25;
+	background-color: #D195FE;
+	opacity: 0.75;
 	height: 51px;
 	font-size: 23px;
 	line-height: 29px;
@@ -722,9 +749,9 @@ button.dropdown-toggle {
 		height: 216px;
 	}
 
-	.search-filters-section {
+	/* .search-filters-section {
 		height: 236px;
-	}
+	} */
 
 	.search-bar {
 		height: 45%;
@@ -916,9 +943,9 @@ button.dropdown-toggle {
 		margin-top: 30px;
 	}
 
-	.search-filters-section {
+	/* .search-filters-section {
 		height: 138px;
-	}
+	} */
 
 	.search-bar {
 		height: 75%;

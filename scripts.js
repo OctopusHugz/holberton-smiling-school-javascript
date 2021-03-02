@@ -283,23 +283,19 @@ $(() => {
       $("section.latest-videos-section .loader-div").remove();
     });
   }
-  createQuotes();
-  loadTutorials();
-  loadVideos();
+
+  function loadCourses() {
+    
+  }
+
+  if (window.location.pathname.endsWith("homepage.html")) {
+    createQuotes();
+    loadTutorials();
+    loadVideos();
+  } else {
+    loadCourses();
+  }
   $(".carousel").carousel({
     interval: 10000,
   });
 });
-
-// XML API Code
-
-// $(document).ready(function () {
-//   $.get("https://smileschool-api.hbtn.info/xml/quotes", (response) => {
-//     let responseDOM = response.documentElement;
-//     let allQuotes = responseDOM.getElementsByTagName("quote");
-//     for (let index = 0; index < allQuotes.length; index++) {
-//       let picURL = responseDOM.getElementsByTagName("pic_url");
-//       console.log(picURL);
-//     }
-//   });
-// });
