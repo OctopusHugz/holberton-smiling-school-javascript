@@ -351,7 +351,7 @@ $(() => {
     createQuotes();
     loadTutorials();
     loadVideos();
-  } else {
+  } else if (window.location.pathname.endsWith("courses.html")) {
     $("#searchButton").click(() => {
       let searchQuery = $("input#coursesSearch").val();
       let searchTopic = $(".topic-dropdown button").text();
