@@ -1,12 +1,28 @@
+// XML API Code
+
+// $(document).ready(function () {
+//   $.get("https://smileschool-api.hbtn.info/xml/quotes", (response) => {
+//     let responseDOM = response.documentElement;
+//     let allQuotes = responseDOM.getElementsByTagName("quote");
+//     for (let index = 0; index < allQuotes.length; index++) {
+//       let picURL = responseDOM.getElementsByTagName("pic_url");
+//       console.log(picURL);
+//     }
+//   });
+// });
+
 $(() => {
   function createQuotes() {
     $(".quote-carousel-section .loader-div").css("display", "flex");
-    $.getJSON("https://smileschool-api.hbtn.info/quotes", (response) => {
-      response.forEach((user) => {
-        let userName = user.name;
-        let userTitle = user.title;
-        let userQuote = user.text;
-        let userPicURL = user.pic_url;
+    $.get("https://smileschool-api.hbtn.info/xml/quotes", (response) => {
+      let responseDOM = response.documentElement;
+      let allQuotes = responseDOM.getElementsByTagName("quote");
+      for (let index = 0; index < allQuotes.length; index++) {
+        let quote = allQuotes[index];
+        let userPicURL = quote.childNodes[0].childNodes[0].data;
+        let userName = quote.childNodes[1].childNodes[0].data;
+        let userTitle = quote.childNodes[2].childNodes[0].data;
+        let userQuote = quote.childNodes[3].childNodes[0].data;
         let quotesAvatarImage = $(
           `<img class="rounded-circle mx-auto" src="${userPicURL}" alt="Carousel slide">`
         );
@@ -42,7 +58,7 @@ $(() => {
         );
         $(mobileArrowLeft).append(leftArrowSVG);
         $(mobileArrowRight).append(rightArrowSVG);
-        if (user.id === 1) {
+        if (quote.id === "1") {
           $(carouselItemActive).append(carouselRow);
           $("#quotesCarousel .carousel-inner").append(carouselItemActive);
         } else {
@@ -63,12 +79,13 @@ $(() => {
         carouselTextQuote.html(userQuote);
         carouselTextName.html(userName);
         carouselTextTitle.html(userTitle);
-      });
+      }
     }).done(() => {
       $(".quote-carousel-section .loader").remove();
       $(".quote-carousel-section .loader-div").remove();
     });
   }
+
   function loadTutorials() {
     $("section.popular-tutorials-section .loader-div").css("display", "flex");
     let arrowLeft = $(
@@ -376,16 +393,3 @@ $(() => {
     loadCourses("", "All", "Most Popular");
   }
 });
-
-// XML API Code
-
-// $(document).ready(function () {
-//   $.get("https://smileschool-api.hbtn.info/xml/quotes", (response) => {
-//     let responseDOM = response.documentElement;
-//     let allQuotes = responseDOM.getElementsByTagName("quote");
-//     for (let index = 0; index < allQuotes.length; index++) {
-//       let picURL = responseDOM.getElementsByTagName("pic_url");
-//       console.log(picURL);
-//     }
-//   });
-// });
