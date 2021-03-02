@@ -345,9 +345,6 @@ $(() => {
     loadTutorials();
     loadVideos();
   } else {
-    // Search value is changing
-    // A new Topic is selected
-    // A new Sort by is selected
     $("#searchButton").click(() => {
       let searchQuery = $("input#coursesSearch").val();
       let searchTopic = $(".topic-dropdown button").text();
