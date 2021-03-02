@@ -286,6 +286,10 @@ $(() => {
 
   function loadCourses(searchQuery, searchTopic, searchSort) {
     $("div.results-grid").empty();
+    let loader = $(
+      '<div class="d-flex align-items-center justify-content-center loader-div"style="height: 400px;"><div class="loader align-items-center"></div></div>'
+    );
+    $("div.results-grid").append(loader);
     let data = { q: searchQuery, topic: searchTopic, sort: searchSort };
     $.getJSON("https://smileschool-api.hbtn.info/courses", data, (response) => {
       let courses = response.courses;
@@ -337,6 +341,9 @@ $(() => {
           }
         }
       });
+    }).done(() => {
+      $(".results-grid .loader").remove();
+      $(".results-grid .loader-div").remove();
     });
   }
 
