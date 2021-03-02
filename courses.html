@@ -14,14 +14,13 @@
 		integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
 
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
 	</script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
 		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-	</script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
 	</script>
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -116,48 +115,45 @@
 				<p class="dropdown-title font-weight-bold text-uppercase">Keywords</p>
 				<div class="input-group">
 					<span class="input-group-prepend">
-						<button class="btn" type="button">
+						<button class="btn" type="button" id="searchButton">
 							<i class="fa fa-search"></i>
 						</button>
 					</span>
-					<input class="form-control py-2" type="text" placeholder="Search by keywords" id="courses-search"
+					<input class="form-control py-2" type="text" placeholder="Search by keywords" id="coursesSearch"
 						autocomplete="off">
 				</div>
 			</div>
-			<div class="dropdown text-left col-sm-12 col-md-5 col-lg-3 d-flex flex-column p-0 mx-auto">
+			<div class="dropdown topic-dropdown text-left col-sm-12 col-md-5 col-lg-3 d-flex flex-column p-0 mx-auto">
 				<p class="dropdown-title font-weight-bold text-uppercase">Topic</p>
 				<button
 					class="btn btn-lg dropdown-toggle w-100 text-left d-flex justify-content-between align-items-center"
-					type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false">
-					Novice
-				</button>
-				<div class="dropdown-menu w-100 p-0" aria-labelledby="dropdownMenuButton">
-					<a class="dropdown-item" href="#">Novice</a>
-					<a class="dropdown-item" href="#">Intermediate</a>
-					<a class="dropdown-item" href="#">Expert</a>
+					type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false">All</button>
+				<div class="dropdown-menu w-100 p-0" aria-labelledby="dropdownMenuButton1" id="searchTopic">
+					<a class="dropdown-item" href="#" data-title="All">All</a>
+					<a class="dropdown-item" href="#" data-title="Novice">Novice</a>
+					<a class="dropdown-item" href="#" data-title="Intermediate">Intermediate</a>
+					<a class="dropdown-item" href="#" data-title="Expert">Expert</a>
 				</div>
 			</div>
 			<div class="dropdown last-dropdown text-left col-sm-12 col-md-5 col-lg-3 d-flex flex-column p-0 mx-auto">
 				<p class="dropdown-title font-weight-bold text-uppercase">Sort By</p>
 				<button
 					class="btn btn-lg dropdown-toggle w-100 text-left d-flex justify-content-between align-items-center"
-					type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false">
-					Most Popular
-				</button>
-				<div class="dropdown-menu w-100 p-0" aria-labelledby="dropdownMenuButton">
-					<a class="dropdown-item" href="#">Most Popular</a>
-					<a class="dropdown-item" href="#">Most Recent</a>
-					<a class="dropdown-item" href="#">Most Viewed</a>
+					type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false">Most Popular</button>
+				<div class="dropdown-menu w-100 p-0" aria-labelledby="dropdownMenuButton2" id="sortTopic">
+					<a class="dropdown-item" href="#" data-title="Most Popular">Most Popular</a>
+					<a class="dropdown-item" href="#" data-title="Most Recent">Most Recent</a>
+					<a class="dropdown-item" href="#" data-title="Most Viewed">Most Viewed</a>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="search-results-section container">
-		<p class="number-results">11 videos</p>
-		<div class="results-grid row row-cols-3">
-			<div class="card col-12 col-sm">
+		<p class="number-results"></p>
+		<div class="results-grid row justify-content-center">
+			<div class="card col-sm-6">
 				<img class="card-img-top" src="images/thumbnail_4.jpg" alt="Card image cap">
 				<svg width="64" height="64" viewBox="0 0 64 64" fill="none" class="play-button"
 					xmlns="http://www.w3.org/2000/svg">
@@ -203,7 +199,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="card col-12 col-sm">
+			<div class="card col-sm-6">
 				<img class="card-img-top" src="images/thumbnail_4.jpg" alt="Card image cap">
 				<svg width="64" height="64" viewBox="0 0 64 64" fill="none" class="play-button"
 					xmlns="http://www.w3.org/2000/svg">
@@ -249,7 +245,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="card col-12 col-sm">
+			<div class="card col-sm-6">
 				<img class="card-img-top" src="images/thumbnail_4.jpg" alt="Card image cap">
 				<svg width="64" height="64" viewBox="0 0 64 64" fill="none" class="play-button"
 					xmlns="http://www.w3.org/2000/svg">
@@ -295,9 +291,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="results-grid row row-cols-sm-3">
-			<div class="card col-12 col-sm">
+			<div class="card col-sm-6">
 				<img class="card-img-top" src="images/thumbnail_4.jpg" alt="Card image cap">
 				<svg width="64" height="64" viewBox="0 0 64 64" fill="none" class="play-button"
 					xmlns="http://www.w3.org/2000/svg">
@@ -343,7 +337,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="card col-12 col-sm">
+			<div class="card col-sm-6">
 				<img class="card-img-top" src="images/thumbnail_4.jpg" alt="Card image cap">
 				<svg width="64" height="64" viewBox="0 0 64 64" fill="none" class="play-button"
 					xmlns="http://www.w3.org/2000/svg">
@@ -389,7 +383,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="card col-12 col-sm">
+			<div class="card col-sm-6">
 				<img class="card-img-top" src="images/thumbnail_4.jpg" alt="Card image cap">
 				<svg width="64" height="64" viewBox="0 0 64 64" fill="none" class="play-button"
 					xmlns="http://www.w3.org/2000/svg">
@@ -435,9 +429,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="results-grid row row-cols-sm-3">
-			<div class="card col-12 col-sm">
+			<div class="card col-sm-6">
 				<img class="card-img-top" src="images/thumbnail_4.jpg" alt="Card image cap">
 				<svg width="64" height="64" viewBox="0 0 64 64" fill="none" class="play-button"
 					xmlns="http://www.w3.org/2000/svg">
@@ -483,7 +475,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="card col-12 col-sm">
+			<div class="card col-sm-6">
 				<img class="card-img-top" src="images/thumbnail_4.jpg" alt="Card image cap">
 				<svg width="64" height="64" viewBox="0 0 64 64" fill="none" class="play-button"
 					xmlns="http://www.w3.org/2000/svg">
@@ -529,7 +521,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="card col-12 col-sm">
+			<div class="card col-sm-6">
 				<img class="card-img-top" src="images/thumbnail_4.jpg" alt="Card image cap">
 				<svg width="64" height="64" viewBox="0 0 64 64" fill="none" class="play-button"
 					xmlns="http://www.w3.org/2000/svg">
@@ -575,9 +567,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="results-grid row row-cols-sm-3 last-results-row">
-			<div class="card col-12 col-sm">
+			<div class="card col-sm-6">
 				<img class="card-img-top" src="images/thumbnail_4.jpg" alt="Card image cap">
 				<svg width="64" height="64" viewBox="0 0 64 64" fill="none" class="play-button"
 					xmlns="http://www.w3.org/2000/svg">
@@ -623,7 +613,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="card col-12 col-sm">
+			<div class="card col-sm-6">
 				<img class="card-img-top" src="images/thumbnail_4.jpg" alt="Card image cap">
 				<svg width="64" height="64" viewBox="0 0 64 64" fill="none" class="play-button"
 					xmlns="http://www.w3.org/2000/svg">

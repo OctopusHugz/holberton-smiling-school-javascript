@@ -284,8 +284,14 @@ $(() => {
     });
   }
 
-  function loadCourses() {
-    
+  function loadCourses(searchQuery, searchTopic, searchSort) {
+    let data = { q: searchQuery, topic: searchTopic, sort: searchSort };
+    $.getJSON("https://smileschool-api.hbtn.info/courses", data, (response) => {
+      let courses = response.courses;
+      courses.forEach((course) => {
+        console.log(course);
+      });
+    });
   }
 
   if (window.location.pathname.endsWith("homepage.html")) {
@@ -293,9 +299,28 @@ $(() => {
     loadTutorials();
     loadVideos();
   } else {
-    loadCourses();
+    // Search value is changing
+    // A new Topic is selected
+    // A new Sort by is selected
+    $("#searchButton").click(() => {
+      let searchQuery = $("input#coursesSearch").val();
+      let searchTopic = $(".topic-dropdown button").text();
+      let searchSort = $(".last-dropdown button").text();
+      loadCourses(searchQuery, searchTopic, searchSort);
+    });
+    $("#searchTopic").click((event) => {
+      let searchQuery = $("input#coursesSearch").val();
+      let searchTopic = $(event.target).data("title");
+      let searchSort = $(".last-dropdown button").text();
+      $(".topic-dropdown button").text(searchTopic);
+      loadCourses(searchQuery, searchTopic, searchSort);
+    });
+    $("#sortTopic").click((event) => {
+      let searchQuery = $("input#coursesSearch").val();
+      let searchTopic = $(".topic-dropdown button").text();
+      let searchSort = $(event.target).data("title");
+      $(".last-dropdown button").text(searchSort);
+      loadCourses(searchQuery, searchTopic, searchSort);
+    });
   }
-  $(".carousel").carousel({
-    interval: 10000,
-  });
 });
