@@ -186,9 +186,21 @@ $(() => {
 
   function loadVideos() {
     $("section.latest-videos-section .loader-div").css("display", "flex");
-    $.getJSON("https://smileschool-api.hbtn.info/latest-videos", (response) => {
-      response.forEach((card) => {
-        let cardSubtitle = card["sub-title"];
+    $.get("https://smileschool-api.hbtn.info/xml/latest-videos", (response) => {
+      let responseDOM = response.documentElement;
+      let allVideos = responseDOM.childNodes;
+      for (let index = 0; index < allVideos.length; index++) {
+        let video = allVideos[index];
+        let videoTitle = video.childNodes[0].childNodes[0].data;
+        let videoSubtitle = video.childNodes[1].childNodes[0].data;
+        let videoThumbUrl = video.childNodes[2].childNodes[0].data;
+        let videoAuthor = video.childNodes[3].childNodes[0].data;
+        let authorPicURL = video.childNodes[4].childNodes[0].data;
+        let videoDuration = video.childNodes[5].childNodes[0].data;
+        let videoTopic = video.childNodes[6].childNodes[0].data;
+        let keywordOne = video.childNodes[7].childNodes[0].childNodes[0].data;
+        let keywordTwo = video.childNodes[7].childNodes[1].childNodes[0].data;
+        let videoRating = video.attributes[1].nodeValue;
         let carouselItemActive = $('<div class="carousel-item active"></div>');
         let carouselItemNonActive = $('<div class="carousel-item"></div>');
         let layoutDiv = $(
@@ -196,23 +208,23 @@ $(() => {
         );
         let cardDiv = $('<div class="card"></div>');
         let cardImgTop = $(
-          `<div class="card-img-top" style="background-image: url(${card.thumb_url});" alt="Card image cap"><img src="./images/play.png" alt="Play Button"></div>`
+          `<div class="card-img-top" style="background-image: url(${videoThumbUrl});" alt="Card image cap"><img src="./images/play.png" alt="Play Button"></div>`
         );
         let cardBody = $('<div class="card-body"></div>');
-        let cardTitle = $(`<h5 class="card-title mb-0">${card.title}</h5>`);
-        let cardText = $(`<p class="card-text">${cardSubtitle}<p>`);
+        let cardTitle = $(`<h5 class="card-title mb-0">${videoTitle}</h5>`);
+        let cardText = $(`<p class="card-text">${videoSubtitle}<p>`);
         let cardBottomInfo = $('<div class="card-bottom-info d-flex"><div>');
         let cardBottomAvatarImg = $(
-          `<img src="${card.author_pic_url}" alt="" class="rounded-circle mpt-avatar">`
+          `<img src="${authorPicURL}" alt="" class="rounded-circle mpt-avatar">`
         );
         let cardBottomAvatarName = $(
-          `<p class="mpt-avatar-name">${card.author}</p>`
+          `<p class="mpt-avatar-name">${videoAuthor}</p>`
         );
         let cardBottomFooter = $(
-          `<div class="card-bottom-footer d-flex justify-content-between align-items-center"><div class="duration">${card.duration}</div></div>`
+          `<div class="card-bottom-footer d-flex justify-content-between align-items-center"><div class="duration">${videoDuration}</div></div>`
         );
         $(layoutDiv).append(cardDiv);
-        if (card.id === 1) {
+        if (index === 0) {
           $("#latestVideosCarousel .carousel-inner").append(carouselItemActive);
           $(carouselItemActive).append(layoutDiv);
           $(`#latestVideosCarousel`)
@@ -240,7 +252,7 @@ $(() => {
         );
         $(cardBottomFooter).prepend(ratingDiv);
         for (let starCount = 0; starCount < 5; starCount++) {
-          if (starCount < card.star) {
+          if (starCount < videoRating) {
             $(ratingDiv).append(
               '<img src="images/star_on.png" alt="" srcset=""></img>'
             );
@@ -250,7 +262,7 @@ $(() => {
             );
           }
         }
-      });
+      }
     }).done(() => {
       $(`#latestVideosCarousel .carousel-item`).each(function () {
         var minPerSlide = 4;
