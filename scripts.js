@@ -297,7 +297,6 @@ $(() => {
         $(".number-results").html(`${courses.length} Video`);
       else $(".number-results").html(`${courses.length} Videos`);
       courses.forEach((card) => {
-        console.log(card);
         let cardSubtitle = card["sub-title"];
         let cardDiv = $('<div class="card col-sm-6"></div>');
         let cardImgTop = $(
