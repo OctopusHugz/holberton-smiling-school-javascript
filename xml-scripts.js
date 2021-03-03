@@ -287,36 +287,47 @@ $(() => {
   }
 
   function loadCourses(searchQuery, searchTopic, searchSort) {
+    // console.log(searchQuery, searchTopic, searchSort);
     $("div.results-grid").empty();
     let loader = $(
       '<div class="d-flex align-items-center justify-content-center loader-div"style="height: 400px;"><div class="loader align-items-center"></div></div>'
     );
     $("div.results-grid").append(loader);
     let data = { q: searchQuery, topic: searchTopic, sort: searchSort };
-    $.getJSON("https://smileschool-api.hbtn.info/courses", data, (response) => {
-      let courses = response.courses;
-      if (courses.length === 1)
-        $(".number-results").html(`${courses.length} Video`);
-      else $(".number-results").html(`${courses.length} Videos`);
-      courses.forEach((card) => {
-        console.log(card);
-        let cardSubtitle = card["sub-title"];
+    $.get("https://smileschool-api.hbtn.info/xml/courses", data, (response) => {
+      let result = response.documentElement;
+      let allCourses = result.childNodes[5].childNodes;
+      if (allCourses.length === 1)
+        $(".number-results").html(`${allCourses.length} Video`);
+      else $(".number-results").html(`${allCourses.length} Videos`);
+      for (let index = 0; index < allCourses.length; index++) {
+        let video = allCourses[index];
+        let videoTitle = video.childNodes[0].childNodes[0].data;
+        let videoSubtitle = video.childNodes[1].childNodes[0].data;
+        let videoThumbUrl = video.childNodes[2].childNodes[0].data;
+        let videoAuthor = video.childNodes[3].childNodes[0].data;
+        let authorPicURL = video.childNodes[4].childNodes[0].data;
+        let videoDuration = video.childNodes[5].childNodes[0].data;
+        let videoTopic = video.childNodes[6].childNodes[0].data;
+        let keywordOne = video.childNodes[7].childNodes[0].childNodes[0].data;
+        let keywordTwo = video.childNodes[7].childNodes[1].childNodes[0].data;
+        let videoRating = video.attributes[1].nodeValue;
         let cardDiv = $('<div class="card col-sm-6"></div>');
         let cardImgTop = $(
-          `<div class="card-img-top" style="background-image: url(${card.thumb_url});" alt="Card image cap"><img src="./images/play.png" alt="Play Button"></div>`
+          `<div class="card-img-top" style="background-image: url(${videoThumbUrl});" alt="Card image cap"><img src="./images/play.png" alt="Play Button"></div>`
         );
         let cardBody = $('<div class="card-body"></div>');
-        let cardTitle = $(`<h5 class="card-title mb-0">${card.title}</h5>`);
-        let cardText = $(`<p class="card-text">${cardSubtitle}<p>`);
+        let cardTitle = $(`<h5 class="card-title mb-0">${videoTitle}</h5>`);
+        let cardText = $(`<p class="card-text">${videoSubtitle}<p>`);
         let cardBottomInfo = $('<div class="card-bottom-info d-flex"><div>');
         let cardBottomAvatarImg = $(
-          `<img src="${card.author_pic_url}" alt="" class="rounded-circle mpt-avatar">`
+          `<img src="${authorPicURL}" alt="" class="rounded-circle mpt-avatar">`
         );
         let cardBottomAvatarName = $(
-          `<p class="mpt-avatar-name">${card.author}</p>`
+          `<p class="mpt-avatar-name">${videoAuthor}</p>`
         );
         let cardBottomFooter = $(
-          `<div class="card-bottom-footer d-flex justify-content-between align-items-center"><div class="duration">${card.duration}</div></div>`
+          `<div class="card-bottom-footer d-flex justify-content-between align-items-center"><div class="duration">${videoDuration}</div></div>`
         );
         $("div.results-grid").append(cardDiv);
         $(cardDiv).append(cardImgTop, cardBody);
@@ -332,7 +343,7 @@ $(() => {
         );
         $(cardBottomFooter).prepend(ratingDiv);
         for (let starCount = 0; starCount < 5; starCount++) {
-          if (starCount < card.star) {
+          if (starCount < videoRating) {
             $(ratingDiv).append(
               '<img src="images/star_on.png" alt="" srcset=""></img>'
             );
@@ -342,7 +353,7 @@ $(() => {
             );
           }
         }
-      });
+      }
     }).done(() => {
       $(".results-grid .loader").remove();
       $(".results-grid .loader-div").remove();
