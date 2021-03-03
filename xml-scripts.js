@@ -1,16 +1,5 @@
 // XML API Code
 
-// $(document).ready(function () {
-//   $.get("https://smileschool-api.hbtn.info/xml/quotes", (response) => {
-//     let responseDOM = response.documentElement;
-//     let allQuotes = responseDOM.getElementsByTagName("quote");
-//     for (let index = 0; index < allQuotes.length; index++) {
-//       let picURL = responseDOM.getElementsByTagName("pic_url");
-//       console.log(picURL);
-//     }
-//   });
-// });
-
 $(() => {
   function createQuotes() {
     $(".quote-carousel-section .loader-div").css("display", "flex");
@@ -88,25 +77,23 @@ $(() => {
 
   function loadTutorials() {
     $("section.popular-tutorials-section .loader-div").css("display", "flex");
-    let arrowLeft = $(
-      '<a class="carousel-control-prev" href="#popularTutorialsCarousel" role="button" data-slide="prev"></a>'
-    );
-    let arrowRight = $(
-      '<a class="carousel-control-next" href="#popularTutorialsCarousel" role="button" data-slide="next"></a>'
-    );
-    let leftArrowSVG = $(
-      '<svg width="30" height="64" viewBox="0 0 30 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M28.7802 63.1838L0.477539 31.8487L28.7802 0.51355L29.5224 1.18384L1.8253 31.8487L29.5224 62.5136L28.7802 63.1838Z" fill="#071629" /></svg><span class="sr-only">Previous</span>'
-    );
-    let rightArrowSVG = $(
-      '<svg width="30" height="64" viewBox="0 0 30 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.21975 63.1838L29.5225 31.8487L1.21975 0.51355L0.477648 1.18384L28.1747 31.8487L0.477648 62.5136L1.21975 63.1838Z" fill="#071629" /></svg><span class="sr-only">Next</span>'
-    );
-    $(arrowLeft).append(leftArrowSVG);
-    $(arrowRight).append(rightArrowSVG);
-    $.getJSON(
-      "https://smileschool-api.hbtn.info/popular-tutorials",
+    $.get(
+      "https://smileschool-api.hbtn.info/xml/popular-tutorials",
       (response) => {
-        response.forEach((card) => {
-          let cardSubtitle = card["sub-title"];
+        let responseDOM = response.documentElement;
+        let allVideos = responseDOM.childNodes;
+        for (let index = 0; index < allVideos.length; index++) {
+          let video = allVideos[index];
+          let videoTitle = video.childNodes[0].childNodes[0].data;
+          let videoSubtitle = video.childNodes[1].childNodes[0].data;
+          let videoThumbUrl = video.childNodes[2].childNodes[0].data;
+          let videoAuthor = video.childNodes[3].childNodes[0].data;
+          let authorPicURL = video.childNodes[4].childNodes[0].data;
+          let videoDuration = video.childNodes[5].childNodes[0].data;
+          let videoTopic = video.childNodes[6].childNodes[0].data;
+          let keywordOne = video.childNodes[7].childNodes[0].childNodes[0].data;
+          let keywordTwo = video.childNodes[7].childNodes[1].childNodes[0].data;
+          let videoRating = video.attributes[1].nodeValue;
           let carouselItemActive = $(
             '<div class="carousel-item active"></div>'
           );
@@ -116,23 +103,23 @@ $(() => {
           );
           let cardDiv = $('<div class="card"></div>');
           let cardImgTop = $(
-            `<div class="card-img-top" style="background-image: url(${card.thumb_url});" alt="Card image cap"><img src="./images/play.png" alt="Play Button"></div>`
+            `<div class="card-img-top" style="background-image: url(${videoThumbUrl});" alt="Card image cap"><img src="./images/play.png" alt="Play Button"></div>`
           );
           let cardBody = $('<div class="card-body"></div>');
-          let cardTitle = $(`<h5 class="card-title mb-0">${card.title}</h5>`);
-          let cardText = $(`<p class="card-text">${cardSubtitle}<p>`);
+          let cardTitle = $(`<h5 class="card-title mb-0">${videoTitle}</h5>`);
+          let cardText = $(`<p class="card-text">${videoSubtitle}<p>`);
           let cardBottomInfo = $('<div class="card-bottom-info d-flex"><div>');
           let cardBottomAvatarImg = $(
-            `<img src="${card.author_pic_url}" alt="" class="rounded-circle mpt-avatar">`
+            `<img src="${authorPicURL}" alt="" class="rounded-circle mpt-avatar">`
           );
           let cardBottomAvatarName = $(
-            `<p class="mpt-avatar-name">${card.author}</p>`
+            `<p class="mpt-avatar-name">${videoAuthor}</p>`
           );
           let cardBottomFooter = $(
-            `<div class="card-bottom-footer d-flex justify-content-between align-items-center"><div class="duration">${card.duration}</div></div>`
+            `<div class="card-bottom-footer d-flex justify-content-between align-items-center"><div class="duration">${videoDuration}</div></div>`
           );
           $(layoutDiv).append(cardDiv);
-          if (card.id === 1) {
+          if (index === 0) {
             $("#popularTutorialsCarousel .carousel-inner").append(
               carouselItemActive
             );
@@ -162,7 +149,7 @@ $(() => {
           );
           $(cardBottomFooter).prepend(ratingDiv);
           for (let starCount = 0; starCount < 5; starCount++) {
-            if (starCount < card.star) {
+            if (starCount < videoRating) {
               $(ratingDiv).append(
                 '<img src="images/star_on.png" alt="" srcset=""></img>'
               );
@@ -172,7 +159,7 @@ $(() => {
               );
             }
           }
-        });
+        }
       }
     ).done(() => {
       $(`#popularTutorialsCarousel .carousel-item`).each(function () {
@@ -199,20 +186,6 @@ $(() => {
 
   function loadVideos() {
     $("section.latest-videos-section .loader-div").css("display", "flex");
-    let arrowLeft = $(
-      '<a class="carousel-control-prev" href="#latestVideosCarousel" role="button" data-slide="prev"></a>'
-    );
-    let arrowRight = $(
-      '<a class="carousel-control-next" href="#latestVideosCarousel" role="button" data-slide="next"></a>'
-    );
-    let leftArrowSVG = $(
-      '<svg width="30" height="64" viewBox="0 0 30 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M28.7802 63.1838L0.477539 31.8487L28.7802 0.51355L29.5224 1.18384L1.8253 31.8487L29.5224 62.5136L28.7802 63.1838Z" fill="#071629" /></svg><span class="sr-only">Previous</span>'
-    );
-    let rightArrowSVG = $(
-      '<svg width="30" height="64" viewBox="0 0 30 64" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.21975 63.1838L29.5225 31.8487L1.21975 0.51355L0.477648 1.18384L28.1747 31.8487L0.477648 62.5136L1.21975 63.1838Z" fill="#071629" /></svg><span class="sr-only">Next</span>'
-    );
-    $(arrowLeft).append(leftArrowSVG);
-    $(arrowRight).append(rightArrowSVG);
     $.getJSON("https://smileschool-api.hbtn.info/latest-videos", (response) => {
       response.forEach((card) => {
         let cardSubtitle = card["sub-title"];
